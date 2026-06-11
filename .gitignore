@@ -1,0 +1,20 @@
+# Datos locales
+minio-data/
+mongo-data/
+spark/ivy/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Secretos / configs locales
+.env

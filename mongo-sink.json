@@ -1,0 +1,14 @@
+{
+  "name": "mongo-sink-industrial",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "tasks.max": "1",
+    "topics": "industrial.machines.raw",
+    "connection.uri": "mongodb://admin:admin123@mongodb:27017/?authSource=admin",
+    "database": "industrial",
+    "collection": "machine_readings",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
