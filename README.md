@@ -1,32 +1,53 @@
-\# Industrial IoT Streaming Pipeline
-
-
+# Industrial IoT Streaming Pipeline
 
 Proyecto de arquitectura IoT industrial con ingesta MQTT, procesamiento en Kafka/Spark y almacenamiento en MinIO y MongoDB.
 
-
-
-\## Arquitectura
-
-
+## Architecture
 
 ```text
+┌─────────────────┐
+│ ESP32 / Wokwi   │
+└────────┬────────┘
+         │ MQTT
+         ▼
+┌─────────────────┐
+│ MQTT Broker     │
+│ Mosquitto       │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ MQTT → Kafka    │
+│ Python Bridge   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Apache Kafka    │
+└──────┬─────┬────┘
+       │     │
+       │     │
+       ▼     ▼
+┌──────────┐ ┌──────────────────┐
+│ Spark    │ │ Kafka Connect    │
+│ Streaming│ │ MongoDB Sink     │
+└────┬─────┘ └────────┬─────────┘
+     │                │
+     ▼                ▼
+┌──────────┐    ┌──────────┐
+│ MinIO    │    │ MongoDB  │
+│ DataLake │    │          │
+└──────────┘    └──────────┘
+```
 
-ESP32 / Wokwi
+## Components
 
-&#x20;     ↓
-
-MQTT Broker
-
-&#x20;     ↓
-
-Python MQTT → Kafka Bridge
-
-&#x20;     ↓
-
-Apache Kafka
-
-&#x20;  ├── Spark Structured Streaming → MinIO Data Lake
-
-&#x20;  └── Kafka Connect → MongoDB
+* ESP32 / Wokwi simulator generates telemetry.
+* Mosquitto receives MQTT messages.
+* Python bridge forwards MQTT events to Kafka.
+* Apache Kafka acts as the event backbone.
+* Spark Structured Streaming stores raw events in MinIO.
+* Kafka Connect persists events into MongoDB.
+* MongoDB Compass provides data exploration.
+* Kafka UI provides topic monitoring.
 
