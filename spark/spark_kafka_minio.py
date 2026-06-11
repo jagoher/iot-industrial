@@ -5,8 +5,8 @@ from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
 spark = SparkSession.builder \
     .appName("IndustrialKafkaToMinIO") \
     .config("spark.hadoop.fs.s3a.endpoint", "http://minio:9000") \
-    .config("spark.hadoop.fs.s3a.access.key", "admin") \
-    .config("spark.hadoop.fs.s3a.secret.key", "admin123") \
+    .config("spark.hadoop.fs.s3a.access.key", "xxx") \
+    .config("spark.hadoop.fs.s3a.secret.key", "xxx") \
     .config("spark.hadoop.fs.s3a.path.style.access", "true") \
     .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false") \
     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
